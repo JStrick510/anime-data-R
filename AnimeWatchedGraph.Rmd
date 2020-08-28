@@ -1,0 +1,27 @@
+---
+title: "Anime Ranking vs Order Watched"
+output: html_notebook
+---
+
+```{r}
+mydata <- read.csv("D:\\tierListDataFrame.csv")
+
+df <- data.frame(mydata)
+
+print(df)
+
+x <- df$Watched
+y <- df$Ranking
+z <- df$Tier
+
+
+plot(x, y, main = "", xlab = "Order Watched", ylab = "Ranking", pch = 19, 
+     col = rgb(0, 0, (1:7)/7)[z], frame = FALSE)
+
+#regression line
+abline(lm(y ~ x, data = df), col = "red")
+
+#loess fit
+lines(lowess(x, y), col = "purple")
+```
+
